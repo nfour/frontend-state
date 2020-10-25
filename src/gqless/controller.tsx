@@ -9,6 +9,7 @@ export const GqlessRoot = graphql(() => {
     </React.Suspense>
   );
 });
+
 export const GqlessController = graphql(() => {
   const orders = (
     <ul>
