@@ -1,34 +1,50 @@
 /** @ts-check @type import('eslint-config-standard-typescript-prettier/types').TsEslintConfig */
 module.exports = {
+  rules: {
+    'camelcase': ['off'],
+    '@typescript-eslint/camelcase': ['off'], // Nah
+    'no-unused-expressions': ['off'],
+    'newline-before-return': ['error'],
+    'no-use-before-define': ['off'],
+    'newline-after-var': ['error'],
+    '@typescript-eslint/ban-types': ['off'],
+    '@typescript-eslint/explicit-module-boundary-types': ['off'],
+    '@typescript-eslint/no-empty-interface': ['off'],
+
+    // https://eslint.org/docs/rules/padding-line-between-statements
+    'padding-line-between-statements': [
+      'error',
+      { prev: '*', next: 'import', blankLine: 'always' },
+      { prev: 'import', next: '*', blankLine: 'always' },
+      { prev: 'import', next: 'import', blankLine: 'never' },
+      { prev: '*', next: 'export', blankLine: 'always' },
+      { prev: 'export', next: '*', blankLine: 'always' },
+      { prev: 'export', next: 'export', blankLine: 'any' },
+      { prev: '*', next: 'multiline-block-like', blankLine: 'always' },
+      { prev: 'multiline-block-like', next: '*', blankLine: 'always' },
+      { prev: '*', next: 'block-like', blankLine: 'always' },
+      { prev: 'block-like', next: '*', blankLine: 'always' },
+      { prev: '*', next: 'multiline-expression', blankLine: 'always' },
+      { prev: 'multiline-expression', next: '*', blankLine: 'always' },
+      { prev: 'if', next: '*', blankLine: 'always' },
+      { prev: '*', next: 'if', blankLine: 'always' },
+      { prev: 'if', next: 'if', blankLine: 'any' },
+      { prev: '*', next: 'return', blankLine: 'always' },
+      {
+        prev: ['singleline-const'],
+        next: ['singleline-const'],
+        blankLine: 'never',
+      },
+    ],
+    'react-hooks/exhaustive-deps': ['off'],
+    'react/prop-types': ['off'],
+  },
   plugins: ['only-warn', 'react', 'react-hooks'],
   extends: [
     'standard-typescript-prettier',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
   ],
-  rules: {
-    'camelcase': ['off'],
-    '@typescript-eslint/camelcase': ['off'],
-    'newline-before-return': ['error'],
-    'no-use-before-define': ['off'],
-    'newline-after-var': ['error'],
-    'padding-line-between-statements': [
-      'error',
-      { blankLine: 'always', prev: '*', next: 'multiline-expression' },
-      { blankLine: 'always', prev: 'multiline-expression', next: '*' },
-      { blankLine: 'always', prev: 'if', next: '*' },
-      { blankLine: 'always', prev: '*', next: 'if' },
-      {
-        blankLine: 'never',
-        prev: ['singleline-const'],
-        next: ['singleline-const'],
-      },
-    ],
-    '@typescript-eslint/explicit-module-boundary-types': ['off'],
-    '@typescript-eslint/ban-types': ['off'],
-    'react-hooks/exhaustive-deps': ['off'],
-    'react/prop-types': ['off'],
-  },
   parserOptions: {
     ecmaVersion: 2019,
     sourceType: 'module',
@@ -37,4 +53,4 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   settings: { react: { version: 'detect' } },
-};
+}
