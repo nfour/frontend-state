@@ -1,10 +1,13 @@
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { Instance, types as t } from 'mobx-state-tree';
+import { RootStore } from './generated';
 
 type IRoot = Instance<typeof RootModel>;
 const RootModel = t
-  .model('Root', {})
+  .model('Root', {
+    gql: RootStore,
+  })
   .views((self) => ({}))
   .actions((self) => ({}));
 
@@ -23,10 +26,26 @@ export const useStore = () => {
   );
 };
 
-export const MstGqlController = observer(() => (
-  <MstContext.Provider value={createStore()}></MstContext.Provider>
-));
+export const MstGqlRoot = observer(() => {
+  const [store] = React.useState(() => createStore());
+
+  return (
+    <MstContext.Provider value={store}>
+      <MstGqlDemoController />
+    </MstContext.Provider>
+  );
+});
+export const MstGqlDemoController = observer(() => {
+  const { gql } = useStore();
+
+  // TODO: need to feed this some data and define root types first
+  return <DemoPageMobx />;
+});
 
 export const DemoPageMobx: React.FC<{}> = observer(() => {
-  return <></>;
+  return (
+    <>
+      <ul>{}</ul>
+    </>
+  );
 });
