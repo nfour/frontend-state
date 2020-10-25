@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ESNext",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "lib": [ "dom", "esnext" ],
+    "jsx": "react",
+    "incremental": true,
+    "sourceMap": true,
+    // This *should* make first-time compiles faster, even in CI
+    "tsBuildInfoFile": "./tsconfig.tsbuildinfo",
+  },
+  "include": ["src", ".eslintrc.js", "package.json"]
+}
