@@ -69,11 +69,9 @@ export const MstGqlDemoController = observer(() => {
   }, []);
 
   const { orderPages } = gql;
-  const firstOrder = [...orderPages.values()][0];
+  const [orderPage] = [...orderPages.values()];
 
-  console.log({ orderPages });
-
-  return <DemoPageMobx {...{ orderPage: firstOrder }} />;
+  return <DemoPageMobx {...{ orderPage }} />;
 });
 
 export const DemoPageMobx: React.FC<{
