@@ -1,9 +1,10 @@
-import * as React from 'react'
+import * as React from 'react';
+import { MstGqlRoot } from './MstGqlController';
 
 export default {
-  title: 'MST-GQL'
+  title: 'MST-GQL',
 };
 
 export const mstGql = () => {
-  return <></>
+  return <MstGqlRoot />;
 };

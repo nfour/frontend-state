@@ -92,7 +92,7 @@ export type ProductLineProductRelation = {
 }
 /* The TypeScript type that explicits the refs to other models in order to prevent a circular refs issue */
 type Refs = {
-
+  orderPages: ObservableMap<string, OrderPageModelType>
 }
 
 
@@ -130,9 +130,9 @@ mutateDeleteProduct="mutateDeleteProduct"
 */
 export const RootStoreBase = withTypedRefs<Refs>()(MSTGQLStore
   .named("RootStore")
-  .extend(configureStoreMixin([['Product', () => ProductModel], ['Storehouse', () => StorehouseModel], ['Address', () => AddressModel], ['Order', () => OrderModel], ['ProductLine', () => ProductLineModel], ['CreditCard', () => CreditCardModel], ['Customer', () => CustomerModel], ['CustomerPage', () => CustomerPageModel], ['ProductPage', () => ProductPageModel], ['StorehousePage', () => StorehousePageModel], ['OrderPage', () => OrderPageModel]], [], "js"))
+  .extend(configureStoreMixin([['Product', () => ProductModel], ['Storehouse', () => StorehouseModel], ['Address', () => AddressModel], ['Order', () => OrderModel], ['ProductLine', () => ProductLineModel], ['CreditCard', () => CreditCardModel], ['Customer', () => CustomerModel], ['CustomerPage', () => CustomerPageModel], ['ProductPage', () => ProductPageModel], ['StorehousePage', () => StorehousePageModel], ['OrderPage', () => OrderPageModel]], ['OrderPage'], "js"))
   .props({
-
+    orderPages: types.optional(types.map(types.late((): any => OrderPageModel)), {})
   })
   .actions(self => ({
     // Find a document from the collection of 'Product' by its id.
