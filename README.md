@@ -30,6 +30,12 @@ Clone the repo then `yarn && yarn dev`
   - Data is not normalized if it is not specified as a Root type
   - Caching seems broken, always fetches and removes from cache while fetching...
   - Not well maintained
+- TODO:
+  - make more root types
+    - this will improve the inferred types for nested objects
+      - less assertion of types
+    - allows for normalization to work
+  - figure out how to make cache actually work well
 
 ## `recoil`
 
