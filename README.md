@@ -1,5 +1,7 @@
 # Frontend State Experiments
 
+Clone the repo then `yarn && yarn dev`
+
 ## `gqless`
 
 - PROS:
