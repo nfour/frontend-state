@@ -99,8 +99,6 @@ export class XRouter<
         encode: encodeURI,
       })(pathname);
 
-      console.log({ matched });
-
       const { index, path, params } = matched || {};
 
       return {
@@ -185,7 +183,9 @@ export class XRouter<
     const { resource, key } = route;
 
     try {
-      const path = compile(resource)(params);
+      const path = compile(resource)(params) || '/';
+
+      console.log({ path });
 
       this.history[method](path);
     } catch (error) {
