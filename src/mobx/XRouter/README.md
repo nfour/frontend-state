@@ -1,8 +1,8 @@
 # XRouter
 
-Mobx powered `History` router.
+Mobx powered `History` router with type safety.
 
-```ts
+```tsx
 import { XRouter } from 'xrouter'
 
 //
@@ -53,7 +53,8 @@ router.routes.home.push({ language: 'en' })
 // Navigates to: /en/user/22
 router.routes.userProfile.push({ language: 'en', userId: '55' })
 
-// Just change the language in the active route
+// Just change the language in the active route.
+// This works as long as the parameter is shared between all routes.
 // Navigates to: /da/user/22
 router.route?.push({ language: 'da' })
 
@@ -89,6 +90,7 @@ class UserProfilePage {
   }
 
   setUserId(userId: string) {
+    // Notice we get to re-use the `language` parameter
     this.route.push({ ...this.route.params, userId })
   }
 }
@@ -105,5 +107,31 @@ void (async () => {
 
   userProfilePage.userId // 200
 })()
+
+// and in react:
+
+import { observer } from 'mobx-react-lite
+
+const Component = observer(() => {
+  const [router] = React.useState(() =>
+    new XRouter(
+      [UserProfileRoute, HomeRoute],
+      createHashHistory()
+    )
+  )
+  return <>
+    {router.route?.key === 'home' && <div>Home Page!</div>}
+    {
+      // Or do this:
+    }
+    {router.routes.userProfile.isActive &&
+      <div>
+        User Profile!
+        UserID: {router.route.userProfile.params?.userId}
+      </div>
+    }
+
+  </>
+})
 
 ```
