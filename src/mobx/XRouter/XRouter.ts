@@ -16,6 +16,9 @@ export const XRoute = <
   return { key, resource, params };
 };
 
+/**
+ * MobX powered browser router.
+ */
 export class XRouter<
   LIST extends IXRoute[],
   KEYS extends LIST[number]['key'],
@@ -89,7 +92,7 @@ export class XRouter<
    *   myProp: router.route?.params.myParam || 'something'
    * })
    */
-  get routes() {
+  get routes(): ROUTES {
     const { pathname = '/', hash, search } = this.location ?? {};
 
     return this.definition.reduce((a, route) => {
@@ -118,13 +121,13 @@ export class XRouter<
           replace: (p: {}) => {
             this.replace(route, p);
           },
-        },
+        } as ILiveRoute<typeof route>,
       };
     }, {} as ROUTES);
   }
 
   /** The currently active route. */
-  get route() {
+  get route(): undefined | ROUTES[keyof ROUTES] {
     if (!this.routes) return;
 
     for (const route of Object.values<ROUTES[keyof ROUTES]>(this.routes as any))
@@ -173,19 +176,15 @@ export class XRouter<
     route: ROUTE_DEF | string,
     params: Partial<ROUTE_DEF['params']> = {},
     method: 'push' | 'replace' = 'push',
-  ) {
+  ): void {
     if (typeof route === 'string') {
-      this.history[method](route);
-
-      return;
+      return this.history[method](route);
     }
 
     const { resource, key } = route;
 
     try {
       const path = compile(resource)(params) || '/';
-
-      console.log({ path });
 
       this.history[method](path);
     } catch (error) {
