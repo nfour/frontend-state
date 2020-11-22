@@ -134,4 +134,28 @@ const Component = observer(() => {
   </>
 })
 
+
+// want some hooks?
+
+import { reaction } from 'mobx'
+
+const listenToUserProfileRoute = () => {
+  let previousIsActive: boolean;
+
+  reaction(() => router.routes.userProfile.isActive, () => {
+    const { isActive } = router.routes.userProfile
+
+    if (isActive === previousIsActive) return
+
+    previousIsActive = isActive
+
+    if (isActive) {
+      // on enter route
+      // ...
+    } else {
+      // on exit route
+      // ...
+    }
+  })
+}
 ```

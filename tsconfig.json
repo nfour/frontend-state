@@ -13,5 +13,5 @@
     // This *should* make first-time compiles faster, even in CI
     "tsBuildInfoFile": "./tsconfig.tsbuildinfo",
   },
-  "include": ["src", ".eslintrc.js", "package.json"]
+  "include": ["src", "*.d.ts", ".eslintrc.js", "package.json"]
 }

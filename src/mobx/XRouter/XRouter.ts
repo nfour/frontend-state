@@ -24,7 +24,8 @@ export class XRouter<
   KEYS extends LIST[number]['key'],
   ROUTES extends {
     [KEY in KEYS]: ILiveRoute<Union.Select<LIST[number], { key: KEY }>>;
-  }
+  },
+  LOOSE_ROUTE extends ILiveRoute<LIST[number]>
 > {
   location!: Location;
   definition: LIST;
@@ -115,46 +116,33 @@ export class XRouter<
           hash,
           search,
           isActive: index !== undefined,
-          push: (p: {}) => {
-            this.push(route, p);
-          },
-          replace: (p: {}) => {
-            this.replace(route, p);
-          },
+          push: (p: {}) => this.push(route, p),
+          replace: (p: {}) => this.replace(route, p),
         } as ILiveRoute<typeof route>,
       };
     }, {} as ROUTES);
   }
 
   /** The currently active route. */
-  get route(): undefined | ROUTES[keyof ROUTES] {
+  get route(): undefined | LOOSE_ROUTE {
     if (!this.routes) return;
 
-    for (const route of Object.values<ROUTES[keyof ROUTES]>(this.routes as any))
+    for (const route of Object.values<LOOSE_ROUTE>(this.routes as any))
       if (route.isActive) return route;
   }
 
   /** history.push() a given route */
-  push<ROUTE extends IXRoute>(
-    route: ROUTE,
-    params?: Partial<ROUTE['params']>,
-  ): void;
+  push<ROUTE extends IXRoute>(route: ROUTE, params?: ROUTE['params']): void;
 
   /** Equal to history.push(pathname) */
   push(pathname: string): void;
 
-  push<ROUTE extends IXRoute>(
-    route: ROUTE | string,
-    params?: Partial<ROUTE['params']>,
-  ) {
+  push<ROUTE extends IXRoute>(route: ROUTE | string, params?: ROUTE['params']) {
     this.navigate(route, params, 'push');
   }
 
   /** history.replace() a given route */
-  replace<ROUTE extends IXRoute>(
-    route: ROUTE,
-    params?: Partial<ROUTE['params']>,
-  ): void;
+  replace<ROUTE extends IXRoute>(route: ROUTE, params?: ROUTE['params']): void;
 
   /** Equal to history.replace(pathname) */
   replace(pathname: string): void;
@@ -184,7 +172,7 @@ export class XRouter<
     const { resource, key } = route;
 
     try {
-      const path = compile(resource)(params) || '/';
+      const path = compile(resource)({ ...params }) || '/';
 
       this.history[method](path);
     } catch (error) {
@@ -197,14 +185,14 @@ export class XRouter<
 
 export type IXRoute = ReturnType<typeof XRoute>;
 
-interface ILiveRoute<ITEM extends IXRoute[][number]> {
+interface ILiveRoute<ITEM extends IXRoute> {
   key: ITEM['key'];
   resource: ITEM['resource'];
+  params?: ITEM['params'];
   hash?: string;
   search?: string;
   index?: number;
   path?: string;
-  params?: ITEM['params'];
   isActive: boolean;
   push(params: ITEM['params']): void;
   replace(params: ITEM['params']): void;
