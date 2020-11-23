@@ -21,6 +21,7 @@ export class XRouter<
   LIST extends IXRoute[],
   KEYS extends LIST[number]['key'],
   ROUTES extends {
+    // [ITEM in LIST[number] as `weeeee${Uppercase<ITEM['key']>}`]: ILiveRoute<ITEM>;
     [KEY in KEYS]: ILiveRoute<Union.Select<LIST[number], { key: KEY }>>;
   },
   LOOSE_ROUTE extends ILiveRoute<LIST[number]>
@@ -74,7 +75,7 @@ export class XRouter<
    * @example
    *
    * // Read parameters
-   * router.routes.myRoute.params.myParam // string
+   * router.routes.myRoute.params?.myParam // string|undefined
    *
    * // Set the route and its parameters
    * // Can be used to set a route from a different route too
@@ -82,13 +83,13 @@ export class XRouter<
    *
    * // on myRoute now...
    *
-   * router.routes.someOtherRoute.push()
+   * router.routes.someOtherRoute.push({})
    *
    * // On someOtherRoute now.
    *
    * router.routes.routeWithRequired.push({
    *   // router.route is always the activeRoute
-   *   myProp: router.route?.params.myParam || 'something'
+   *   myProp: router.route?.params?.myParam || 'something'
    * })
    */
   get routes(): ROUTES {
