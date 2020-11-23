@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { IndexPage } from './countriesExample/views';
-import { Root } from './countriesExample/models';
+import { IndexPage } from './countriesExample/modelsAndViews';
+import { Root } from './countriesExample/utils';
 import { MobxTodoListExampleRoot } from './todoListExample/views';
 
 export default {

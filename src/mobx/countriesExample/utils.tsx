@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RootStore } from './views';
+import { RootStore } from './modelsAndViews';
 
 export function useStore() {
   return React.useContext(StoreContext) || throwMissingStoreError();
