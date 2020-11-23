@@ -30,8 +30,8 @@ const DenmarkRoute = XRoute(
     '|',
   )})/:nation(denmark)/:state(${danishStates.join('|')})`,
   {} as {
-    language: typeof danishLanguages[number];
     nation: 'denmark';
+    language: typeof danishLanguages[number];
     state: typeof danishStates[number];
   },
 );
@@ -51,7 +51,6 @@ abstract class Nation {
     makeObservable(this, {
       code: observable,
       name: observable,
-      // isActive: computed,
     });
   }
 
@@ -73,6 +72,7 @@ class Australia extends Nation {
     return this.root.router.routes.australia.isActive;
   }
 }
+
 class Denmark extends Nation {
   constructor(...args: any) {
     super(...(args as [any, any]));
@@ -133,7 +133,7 @@ export const IndexPage = () => {
 };
 
 const NationsList = observer(() => {
-  const { nations, router } = useStore();
+  const { nations } = useStore();
 
   return (
     <ul
@@ -223,8 +223,6 @@ const NavBar = observer(() => {
           <select
             value={router.route?.params?.language || 'en'}
             onChange={(e) => {
-              console.log(e, router.route);
-
               if (!router.route) return;
 
               router.route.push({

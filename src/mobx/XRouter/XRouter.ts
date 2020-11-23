@@ -12,12 +12,10 @@ export const XRoute = <
   key: KEY,
   resource: RESOURCE,
   params: PARAMS,
-) => {
-  return { key, resource, params };
-};
+) => ({ key, resource, params });
 
 /**
- * MobX powered browser router.
+ * MobX powered History based router.
  */
 export class XRouter<
   LIST extends IXRoute[],
