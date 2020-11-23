@@ -50,12 +50,12 @@ autorun(() => {
 // Navigate to: /en
 router.routes.home.push({ language: 'en' })
 
-// Navigates to: /en/user/22
-router.routes.userProfile.push({ language: 'en', userId: '55' })
+// Navigates to: /en/user/11
+router.routes.userProfile.push({ language: 'en', userId: '11' })
 
 // Just change the language in the active route.
 // This works as long as the parameter is shared between all routes.
-// Navigates to: /da/user/22
+// Navigates to: /da/user/11
 router.route?.push({ language: 'da' })
 
 // Re-use the current language
@@ -67,7 +67,7 @@ router.routes.home.push({ language: router.route?.params?.language })
 router.push(UserProfileRoute, { language: 'de', userId: '55' })
 
 // Access route properties:
-router.route?.params?.userId // => 55
+router.route?.params?.userId // => '55'
 router.route?.params?.language // => 'de'
 
 // Use routes in your own mobx models:

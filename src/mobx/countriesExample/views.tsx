@@ -2,8 +2,8 @@ import { computed, makeAutoObservable, makeObservable, observable } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { css } from 'styled-components';
-import { useStore } from './store';
-import { XRoute, XRouter } from './XRouter/XRouter';
+import { useStore } from './models';
+import { XRoute, XRouter } from '../XRouter/XRouter';
 
 const RootRoute = XRoute(
   'root',
