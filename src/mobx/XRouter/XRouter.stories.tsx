@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
-import { XRoute, XRouter } from './XRouter';
+import { XRoute, XRouter } from 'xroute';
 
 export default {
   title: 'XRouter',

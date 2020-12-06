@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { css } from 'styled-components';
 import { useStore } from './utils';
-import { XRoute, XRouter } from '../XRouter/XRouter';
+import { XRoute, XRouter } from 'xroute';
 
 const RootRoute = XRoute(
   'root',

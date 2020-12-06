@@ -11426,6 +11426,16 @@ write@1.0.3:
   dependencies:
     mkdirp "^0.5.1"
 
+xroute@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/xroute/-/xroute-1.1.0.tgz#28a253264f42b7e5591e88a9e22abca0ba85cd14"
+  integrity sha512-p2JKq2/hqI+tdp1mNvzXaYKtPkAWga1a/iMgCenfuI2dYHFFZBH/MyRs2ecp5/48ZhlayPA9h6LiUbdGXI+ikA==
+  dependencies:
+    "@types/lodash" "^4.14.165"
+    lodash "^4.17.20"
+    path-to-regexp "^6.2.0"
+    ts-toolbelt "^8.0.7"
+
 xtend@^4.0.0, xtend@~4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.2.tgz#bb72779f5fa465186b1f438f674fa347fdb5db54"
